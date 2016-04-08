@@ -16,10 +16,17 @@
 	</head>
 	<body>
 		<div id='principal'>
+		
 			<h4>TABLA DE USUARIOS: </h4>
-			<input type='button' value='Añadir' id='anadir' class="btn btn-success"></input>
+			
+			<input type='button' value='Añadir' id='anadir' class="btn btn-success btn-lg"></input>
+			
 			<!-- TABLA DE LOS USUARIOS -->
 			<div id="divtabla"></div>
+			
+			<input type='button' value='Eliminar Seleccionados' id='deleteAll' class="btn btn-danger btn-lg"></input>
+			
+			
 			<!-- MODAL PARA LA INFORMACION DEL USUARIO -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
@@ -49,6 +56,23 @@
 				</div>
 			  </div>
 			</div>
+			<!-- MODAL PARA LA INFORMACION DEL USUARIO -->
+			<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="peligro">CUIDADO:</h4>
+						</div>
+						<div class="modal-body">
+							<p class="peligro">¿Está seguro de que desea eliminar los usuarios seleccionados?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="si" class="btn btn-warning" data-dismiss="modal">SI</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script id="pModalInfo" type="text/x-handlebars-template"> 
 			<p>ID: {{id}}&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE: {{nombre}}</p>
@@ -67,39 +91,39 @@
 		<script id="pModalModificar" type="text/x-handlebars-template">
 			<form class="form-inline" role="form">
 				<lablel>ID: </lablel>
-				<input type='text' id='id' class="form-control" value={{id}} disabled>
+				<input type='text' id='id' class="form-control" value="{{id}}" disabled>
 				<lablel>NOMBRE: </lablel>
-				<input type='text' id='nombre' class="form-control" value={{nombre}}></br>
+				<input type='text' id='nombre' class="form-control" value="{{nombre}}"></br>
 				<lablel>USUARIO: </lablel>
-				<input type='text' id='usuario' class="form-control" value={{nUsuario}} disabled>
+				<input type='text' id='usuario' class="form-control" value="{{nUsuario}}" disabled>
 				<lablel>EMAIL: </lablel>
-				<input type='text' id='email' class="form-control" value={{email}}></br>
+				<input type='text' id='email' class="form-control" value="{{email}}"></br>
 				<lablel>TELEFONO: </lablel>
-				<input type='text' id='tlfno' class="form-control" value={{tlfno}}>
+				<input type='text' id='tlfno' class="form-control" value="{{tlfno}}">
 				<lablel>SITIO WEB: </lablel>
-				<input type='text' id='web' class="form-control" value={{web}}></br>
+				<input type='text' id='web' class="form-control" value="{{web}}"></br>
 				<hr>
 				<lablel>DIRECCION:</lablel></br>
 				<lablel>CALLE: </lablel>
-				<input type='text' id='calle' class="form-control" value={{calle}}>
+				<input type='text' id='calle' class="form-control" value="{{calle}}">
 				<lablel>PISO: </lablel>
-				<input type='text' id='piso' class="form-control" value={{piso}}></br>
+				<input type='text' id='piso' class="form-control" value="{{piso}}"></br>
 				<lablel>CIUDAD: </lablel>
-				<input type='text' id='ciudad' class="form-control" value={{cuidad}}>
+				<input type='text' id='ciudad' class="form-control" value="{{ciudad}}">
 				<lablel>CODIGO POSTAL: </lablel>
-				<input type='text' id='cp' class="form-control" value={{cp}}></br>
+				<input type='text' id='cp' class="form-control" value="{{cp}}"></br>
 				<lablel>LATITUD: </lablel>
-				<input type='text' id='lat' class="form-control" value={{lat}} disabled>
+				<input type='text' id='lat' class="form-control" value="{{lat}}" disabled>
 				<lablel>LONGITUD: </lablel>
-				<input type='text' id='lng' class="form-control" value={{lng}} disabled></br>
+				<input type='text' id='lng' class="form-control" value="{{lng}}" disabled></br>
 				<hr>
 				<lablel>EMPRESA:<br/>
 				<lablel>NOMBRE: </lablel>
-				<input type='text' id='nCompania' class="form-control" value={{nombreCompania}} disabled>
+				<input type='text' id='nCompania' class="form-control" value="{{nombreCompania}}" disabled>
 				<lablel>ESLOGAN: </lablel>
-				<input type='text' id='eslogan' class="form-control" value={{eslogan}} disabled></br>
+				<input type='text' id='eslogan' class="form-control" value="{{eslogan}}" disabled></br>
 				<lablel>ATRIBUTOS: </lablel>
-				<input type='text' id='cargos' class="form-control" value={{cargos}} disabled>
+				<input type='text' id='cargos' class="form-control" value="{{cargos}}" disabled>
 			</form>
 		</script>
 	</body>

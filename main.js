@@ -1,6 +1,5 @@
 var arrayUsuarios=[];
-//
-
+//******** MAPA ********
 function initMap(latitud, longitud) {
 	var mapDiv = $('#mapa');
 	var map = new google.maps.Map(mapDiv[0], {
@@ -14,10 +13,12 @@ function initMap(latitud, longitud) {
 	});
 	return map;
 }
-//funcion para añadir una fila
-function fFila(usuario){
+//******** FILA ********
+function fFila(usuario, valor){
 	$("#tabla tbody").append(
 		$('<tr>').append(
+				$('<td>').html('<input type="checkbox" class="check" value="'+valor+'">')
+			).append(
 				$('<td>').text(usuario.nombre).click(function(){fMostrarUsuario(usuario);})
 			).append(
 				$('<td>').text(usuario.nUsuario)
@@ -38,14 +39,14 @@ function fFila(usuario){
 			)
 		);
 }
-//funcion para la creacion de la tabla
+//******** TABLA ********
 function fTabla(){
 	$("#divtabla").empty();
 	$("#divtabla").append("<table id='tabla' class='table' data-page-length='3'>");
-	$("table").append("<thead><tr><th>NOMBRE</th><th>USUARIO</th><th>EMAIL</th><th>DIRECCION</th><th>TELEFONO</th><th>SITIO WEB</th><th>COMPAÑIA</th><th>MODIFICAR</th><th>ELIMINAR</th></tr></thead>");
+	$("table").append("<thead><tr><th><input type='checkbox' id='selectTodos'></th><th>NOMBRE</th><th>USUARIO</th><th>EMAIL</th><th>DIRECCION</th><th>TELEFONO</th><th>SITIO WEB</th><th>COMPAÑIA</th><th>MODIFICAR</th><th>ELIMINAR</th></tr></thead>");
 	$("table").append("<tbody>");
 	for(var i=0; i<arrayUsuarios.length; i++){		
-		fFila(arrayUsuarios[i]);
+		fFila(arrayUsuarios[i], i);
 	}
 	$('#tabla').dataTable({
 		"order": [],
@@ -65,7 +66,27 @@ function fTabla(){
 		"lengthMenu": [[1, 2, 3, 4, 5, 6, 7, 8, 9,-1], [1, 2, 3, 4, 5, 6, 7, 8, 9,"Todos"]]
 	});
 }
-//funcion para mostrar datos usuario
+//******** CREACION DE UN USUARIO ********
+function fUsuario(){
+	var user=new Object();
+	user.id=$("#id").val();
+	user.nombre=$("#nombre").val();
+	user.nUsuario=$("#usuario").val();
+	user.email=$("#email").val();
+	user.calle=$("#calle").val();
+	user.piso=$("#piso").val();
+	user.ciudad=$("#ciudad").val();
+	user.cp=$("#cp").val();
+	user.lat=$("#lat").val();
+	user.lng=$("#lng").val();
+	user.tlfno=$("#tlfno").val();
+	user.web=$("#web").val();
+	user.nombreCompania=$("#nCompania").val();
+	user.eslogan=$("#eslogan").val();
+	user.cargos=$("#cargos").val();
+	return user;
+}
+//******** INFO USUARIO ********
 function fMostrarUsuario(usuario){
 	var fuente = $('#pModalInfo').html();  
 	var plantilla = Handlebars.compile(fuente); 
@@ -85,7 +106,28 @@ function fMostrarUsuario(usuario){
 	});*/
 	
 }
-//funcion para eliminar
+//******** AÑADIR USUARIO ********
+function fAnadir(){
+	$("#myModal2 .modal-header").text("AÑADIR DATOS DEL USUARIO");
+	$("#myModal2 .modal-footer #cancelar").before("<input type='button' value='Añadir' class='btn btn-warning' id='ok'></input>");
+	var fuente = $('#pModalModificar').html();  
+	var plantilla = Handlebars.compile(fuente);	
+	$("#myModal2 .modal-body").append(plantilla());
+	$(":text").val("");
+	$("#myModal2").modal("show");
+	$("#ok").click(function(){			
+			arrayUsuarios.push(fUsuario());
+			fTabla();
+			$(":text").val("");
+			$("#myModal2").modal("hide");
+	});
+	$('#myModal2').on('hidden.bs.modal', function (e) {
+		$("#myModal2 .modal-body").empty();
+		$("#myModal2 #ok").remove();
+	});
+	$("#myModal2 .modal-body input").prop("disabled", false);
+}
+//******** ELIMINAR USUARIO ********
 function fEliminar(id){
 	arrayUsuarios=$.grep(arrayUsuarios, function(u){
 		return u.id != id;
@@ -126,45 +168,14 @@ function fModificar(usuario){
 		});
 	}
 }
-//******** AÑADIR USUARIO ********
-function fAnadir(){
-	$("#myModal2 .modal-header").text("AÑADIR DATOS DEL USUARIO");
-	$("#myModal2 .modal-footer #cancelar").before("<input type='button' value='Añadir' class='btn btn-warning' id='ok'></input>");
-	var fuente = $('#pModalModificar').html();  
-	var plantilla = Handlebars.compile(fuente);	
-	$("#myModal2 .modal-body").append(plantilla());
-	$(":text").val("");
-	$("#myModal2").modal("show");
-	$("#ok").click(function(){			
-			arrayUsuarios.push(fUsuario());
-			fTabla();
-			$(":text").val("");
-			$("#myModal2").modal("hide");
-	});
-	$('#myModal2').on('hidden.bs.modal', function (e) {
-		$("#myModal2 .modal-body").empty();
-		$("#myModal2 #ok").remove();
-	});
-}
-//******** CREACION DE UN USUARIO ********
-function fUsuario(){
-	var user=new Object();
-	user.id=$("#id").val();
-	user.nombre=$("#nombre").val();
-	user.nUsuario=$("#usuario").val();
-	user.email=$("#email").val();
-	user.calle=$("#calle").val();
-	user.piso=$("#piso").val();
-	user.ciudad=$("#ciudad").val();
-	user.cp=$("#cp").val();
-	user.lat=$("#lat").val();
-	user.lng=$("#lng").val();
-	user.tlfno=$("#tlfno").val();
-	user.web=$("#web").val();
-	user.nombreCompania=$("#nCompania").val();
-	user.eslogan=$("#eslogan").val();
-	user.cargos=$("#cargos").val();
-	return user;
+//******** ELIMINAR ELEMENTOS SELECCIONADOS ********
+function fEliminarSeleccionados(){
+	$("#myModal3").modal("show");
+	$("#si").click(function(){	
+		$('.check:checked').each(function() {
+			fEliminar($(this).val());
+		});
+    });
 }
 //******** READY ********
 $(document).ready(function() {
@@ -424,4 +435,21 @@ $(document).ready(function() {
 		
 	//});
 	$("#anadir").click(function(){fAnadir();});
+	$("#deleteAll").click(function(){fEliminarSeleccionados();});
+	$("#selectTodos").change(function() {
+		if($("#selectTodos").is(':checked')){
+			var reg=$("select[name='tabla_length']").val();
+			if (reg==-1){
+				$("input[type='checkbox']").prop("checked", true);
+			}else{
+				$(".check").each(function(){
+					if($(this).val()<reg){
+						$(this).attr(":checked");
+					}								
+				});
+			}
+		}else{
+			$("input[type='checkbox']").prop("checked", false);
+		}
+	});
 });

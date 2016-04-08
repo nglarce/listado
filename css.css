@@ -3,7 +3,6 @@
 }
 #principal h4{
 	float:left;
-	
 }
 #anadir{
 	float:right;
@@ -21,4 +20,11 @@ hr{
 .form-inline input,label{
 	margin-top: 10px;
 	margin-left: 15px;
+}
+#deleteAll{
+	float:left;
+}
+.peligro{
+	color: red;
+	font-size:1.5em;
 }
