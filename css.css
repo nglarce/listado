@@ -1,0 +1,16 @@
+#principal{
+	padding:15px;
+}
+#principal h4{
+	float:left;
+}
+#anadir{
+	float:right;
+}
+#tabla{
+	font-size: 0.9em;
+}
+#mapa {
+    width: 100%;
+    height: 400px;
+}

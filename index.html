@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Listado Megapro++</title>
+		<meta charset="UTF-8">
+		<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/css.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script type="text/javascript" src="scripts/main.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+	</head>
+	<body>
+		<div id='principal'>
+			<h4>TABLA DE USUARIOS: </h4>
+			<input type='button' value='Añadir' id='anadir' class="btn btn-success"></input>
+			<div id="divtabla"></div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<p>Datos Personales:</p>
+						</div>
+						<div class="modal-body">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- modal para mostrar modificar o añadir los datos -->
+			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<input type='button' value='CANCELAR' class='btn btn-default' id="cancelar" data-dismiss='modal'></input>
+					</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+		<script id="pModalInfo" type="text/x-handlebars-template"> 
+			<p>ID: {{id}}</p>
+			<p>NOMBRE: {{nombre}}</p>
+			<p>USUARIO: {{nUsuario}}</p>
+			<p>EMAIL: {{email}}</p>
+			<p>DIRECCION:<br/>CALLE: {{calle}},PISO: {{piso}},CIUDAD: {{ciudad}},CODIGO POSTAL: {{cp}}</p>
+			<p>TELEFONO: {{tlfno}},SITIO WEB: {{web}}</p>
+			<p>EMPRESA:<br/>NOMBRE: {{nombreCompania}},ESLOGAN: {{eslogan}},CARGOS: {{cargos}}</p>
+			<div id='mapa'></div>
+		</script>
+		<script id="pModalModificar" type="text/x-handlebars-template"> 
+			<p>ID: <input type='text' id='id' class="form-control" value={{id}}>
+			NOMBRE: <input type='text' id='nombre' class="form-control" value={{nombre}}>
+			USUARIO: <input type='text' id='usuario' class="form-control" value={{nUsuario}}>
+			EMAIL: <input type='text' id='email' class="form-control" value={{email}}>
+			DIRECCION:<br/>
+			CALLE: <input type='text' id='calle' class="form-control" value={{calle}}>
+			PISO: <input type='text' id='piso' class="form-control" value={{piso}}>
+			CIUDAD: <input type='text' id='ciudad' class="form-control" value={{cuidad}}>
+			CODIGO POSTAL: <input type='text' id='cp' class="form-control" value={{cp}}>
+			LATITUD: <input type='text' id='lat' class="form-control" value={{lat}}>
+			LONGITUD: <input type='text' id='lng' class="form-control" value={{lng}}>
+			TELEFONO: <input type='text' id='tlfno' class="form-control" value={{tlfno}}>
+			SITIO WEB: <input type='text' id='web' class="form-control" value={{web}}>
+			EMPRESA:<br/>
+			NOMBRE: <input type='text' id='nCompania' class="form-control" value={{nombreCompania}}>
+			ESLOGAN: <input type='text' id='eslogan' class="form-control" value={{eslogan}}>
+			CARGOS: <input type='text' id='cargos' class="form-control" value={{cargos}}></p>
+		</script>
+	</body>
+</html>
