@@ -179,8 +179,8 @@ function fEliminarSeleccionados(){
 }
 //******** READY ********
 $(document).ready(function() {
-	//$.getJSON("http://jsonplaceholder.typicode.com/users", function(data) {
-		var data = [
+	$.getJSON("http://jsonplaceholder.typicode.com/users", function(data) {
+		/*var data = [
   {
     "id": 1,
     "name": "Leanne Graham",
@@ -412,7 +412,7 @@ $(document).ready(function() {
     }
   }
 ];
-		$.each(data, function(i,item) {
+		*/$.each(data, function(i,item) {
 			var user=new Object();
 			user.id=item.id;
 			user.nombre=item.name;
@@ -433,9 +433,11 @@ $(document).ready(function() {
 		});
 		fTabla();
 		
-	//});
+	});
 	$("#anadir").click(function(){fAnadir();});
 	$("#deleteAll").click(function(){fEliminarSeleccionados();});
+	
+	//selecionar todos
 	$("#selectTodos").change(function() {
 		if($("#selectTodos").is(':checked')){
 			var reg=$("select[name='tabla_length']").val();
@@ -443,7 +445,7 @@ $(document).ready(function() {
 				$("input[type='checkbox']").prop("checked", true);
 			}else{
 				$(".check").each(function(){
-					if($(this).val()<reg){
+					if(parseInt($(this).val())<reg){
 						$(this).attr(":checked");
 					}								
 				});
