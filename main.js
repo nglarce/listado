@@ -411,8 +411,9 @@ $(document).ready(function() {
       "bs": "target end-to-end models"
     }
   }
-];
-		*/$.each(data, function(i,item) {
+];*/
+	
+		$.each(data, function(i,item) {
 			var user=new Object();
 			user.id=item.id;
 			user.nombre=item.name;
@@ -438,7 +439,7 @@ $(document).ready(function() {
 	$("#deleteAll").click(function(){fEliminarSeleccionados();});
 	
 	//selecionar todos
-	$("#selectTodos").change(function() {
+	$(document).on("change", "#selectTodos", function() {
 		if($("#selectTodos").is(':checked')){
 			var reg=$("select[name='tabla_length']").val();
 			if (reg==-1){
@@ -446,8 +447,8 @@ $(document).ready(function() {
 			}else{
 				$(".check").each(function(){
 					if(parseInt($(this).val())<reg){
-						$(this).attr(":checked");
-					}								
+						$(this).prop("checked", true);
+					}
 				});
 			}
 		}else{
